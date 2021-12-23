@@ -31,7 +31,8 @@ def pol2cart(r,theta):
     return x, y
 def cart2pol(x, y):
     z = x + y * 1j
-    r,theta = np.abs(z), np.angle(z)
+    r,theta = np.abs(z), np.angle(z)*57.2958
+    # 1rad = 57.2958 deg 
     return r,theta
 
 # ================================================
@@ -52,15 +53,14 @@ Matrix=np.array([[np.log(2*Ya/r) , np.log(dab_p/dab) , np.log(dac_p/dac)],
 Inv_Matrix = np.linalg.inv(Matrix)
 Matrix_multi =np.matmul(Inv_Matrix, V)
 q_cart=2*np.pi*E0*np.matmul(Inv_Matrix, V)
-(Qa,QIa)=cart2pol(np.real(q_cart[0]), np.imag(q_cart[0]))
-(Qb,QIb)=cart2pol(np.real(q_cart[1]), np.imag(q_cart[1]))
-(Qc,QIc)=cart2pol(np.real(q_cart[2]), np.imag(q_cart[2]))
+(Qa,Qra)=cart2pol(np.real(q_cart[0]), np.imag(q_cart[0]))
+(Qb,Qrb)=cart2pol(np.real(q_cart[1]), np.imag(q_cart[1]))
+(Qc,Qrc)=cart2pol(np.real(q_cart[2]), np.imag(q_cart[2]))
 np.set_printoptions(precision=3)
 
 
-print(f"Qa={Qa}∠{QIa},Qb={Qb}∠{QIb},Qc={Qc}∠{QIc}")
-print(q_cart)
-print()
+ic(Qa,Qra,Qb,Qrb,Qc,Qrc)
+ic(q_cart)
 
 dpa = np.sqrt((Xp-Xa)**2+(Yp-Ya)**2)
 dpb = np.sqrt((Xp-Xb)**2+(Yp-Yb)**2)
@@ -73,3 +73,26 @@ ic(dpa,dpb,dpc,dpa_p,dpb_p,dpc_p)
 
 Vp=((q_cart[0]*np.log(dpa_p/dpa))+(q_cart[1]*np.log(dpb_p/dpb))+(q_cart[2]*np.log(dpc_p/dpc)))/(2*np.pi*E0)
 (VP,VI)=cart2pol(np.real(Vp), np.imag(Vp))
+ic(Vp,VP,VI)
+
+#====== MAGNETIC FIELD ======
+Dpa = np.sqrt((Xp-Xa)**2+(0-Ya)**2)
+Dpb = np.sqrt((Xp-Xb)**2+(0-Yb)**2)
+Dpc = np.sqrt((Xp-Xc)**2+(0-Yc)**2)
+ic(Dpa,Dpb,Dpc)
+
+I = 1606.539
+Ia,Ima = pol2cart(I,np.radians(theta_a))
+Ib,Imb = pol2cart(I,np.radians(theta_b))
+Ic,Imc = pol2cart(I,np.radians(theta_c))
+ic(Ia,Ima,Ib,Imb,Ic,Imc)
+Iphase = np.array([[complex(Ia,Ima)],[complex(Ib,Imb)],[complex(Ic,Imc)]])
+ic(Iphase)
+SuperPosition = np.array([[np.log(Dpa/dpa) ,np.log(Dpb/dpb) ,np.log(Dpc/dpc)]])
+ic(SuperPosition)
+matrix2 = np.matmul(SuperPosition, Iphase)
+ic(matrix2)
+Ep_c = 2*(10**-7)*100*np.pi*matrix2
+ic(Ep_c)
+(Ep,Ei)=cart2pol(np.real(Ep_c), np.imag(Ep_c))
+ic(Ep,Ei)
