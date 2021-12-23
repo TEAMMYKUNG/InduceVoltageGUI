@@ -1,4 +1,4 @@
-
+from icecream import ic
 
 # !Define (x,y) phase A,B,C
 Xa = 0; # phase A
@@ -55,8 +55,21 @@ q_cart=2*np.pi*E0*np.matmul(Inv_Matrix, V)
 (Qa,QIa)=cart2pol(np.real(q_cart[0]), np.imag(q_cart[0]))
 (Qb,QIb)=cart2pol(np.real(q_cart[1]), np.imag(q_cart[1]))
 (Qc,QIc)=cart2pol(np.real(q_cart[2]), np.imag(q_cart[2]))
-print("ระยะห่างระหว่างจุด")
-print(f"dab={dab:.3f} , dac={dac:.3f} , dbc={dbc:.3f} , dab_p={dab_p:.3f} , dac_p={dac_p:.3f} , dbc_p={dbc_p:.3f}")
 np.set_printoptions(precision=3)
+
+
 print(f"Qa={Qa}∠{QIa},Qb={Qb}∠{QIb},Qc={Qc}∠{QIc}")
-print(q_cart )
+print(q_cart)
+print()
+
+dpa = np.sqrt((Xp-Xa)**2+(Yp-Ya)**2)
+dpb = np.sqrt((Xp-Xb)**2+(Yp-Yb)**2)
+dpc = np.sqrt((Xp-Xc)**2+(Yp-Yc)**2)
+dpa_p = np.sqrt((Xp-Xa)**2+(Yp+Ya)**2)
+dpb_p = np.sqrt((Xp-Xb)**2+(Yp+Yb)**2)
+dpc_p = np.sqrt((Xp-Xc)**2+(Yp+Yc)**2)
+
+ic(dpa,dpb,dpc,dpa_p,dpb_p,dpc_p)
+
+Vp=((q_cart[0]*np.log(dpa_p/dpa))+(q_cart[1]*np.log(dpb_p/dpb))+(q_cart[2]*np.log(dpc_p/dpc)))/(2*np.pi*E0)
+(VP,VI)=cart2pol(np.real(Vp), np.imag(Vp))
