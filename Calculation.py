@@ -7,8 +7,9 @@ Xb = 4  # phase B
 Yb = 15.1
 Xc = 4  # phase C
 Yc = 12.6
-Xp = -2.3  # กำหนดจุด P
+Xp = -2.3  # P
 Yp = 15.1
+Size = 40
 r = 12.825  # radius of cable or GMR
 # !Defind Phase A,B,C
 r_a = 115
@@ -71,9 +72,9 @@ dpc_p = np.sqrt((Xp-Xc)**2+(Yp+Yc)**2)
 
 ic(dpa,dpb,dpc,dpa_p,dpb_p,dpc_p)
 
-Vp=((q_cart[0]*np.log(dpa_p/dpa))+(q_cart[1]*np.log(dpb_p/dpb))+(q_cart[2]*np.log(dpc_p/dpc)))/(2*np.pi*E0)
-(VP,VI)=cart2pol(np.real(Vp), np.imag(Vp))
-ic(Vp,VP,VI)
+Vpe=((q_cart[0]*np.log(dpa_p/dpa))+(q_cart[1]*np.log(dpb_p/dpb))+(q_cart[2]*np.log(dpc_p/dpc)))/(2*np.pi*E0)
+(VPE,VIE)=cart2pol(np.real(Vpe), np.imag(Vpe))
+ic(Vpe,VPE,VIE)
 
 #====== MAGNETIC FIELD ======
 Dpa = np.sqrt((Xp-Xa)**2+(0-Ya)**2)
@@ -96,3 +97,7 @@ Ep_c = 2*(10**-7)*100*np.pi*matrix2
 ic(Ep_c)
 (Ep,Ei)=cart2pol(np.real(Ep_c), np.imag(Ep_c))
 ic(Ep,Ei)
+vpm_c = Ep_c*Size
+ic (vpm_c)
+(Vpm,Vpmi)=cart2pol(np.real(vpm_c), np.imag(vpm_c))
+ic(Vpm,Vpmi)
