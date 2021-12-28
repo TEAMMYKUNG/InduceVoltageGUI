@@ -2,7 +2,6 @@ from icecream import ic
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
 plt.style.use('ggplot')
 # !Define (x,y) phase A,B,C
 xa = 0  # phase A
