@@ -1,23 +1,17 @@
 import sys
+from PyQt6.QtWidgets import QApplication, QWidget
+from PyQt6.QtGui import QIcon
 
-from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
 
-
-# Subclass QMainWindow to customize your application's main window
-class MainWindow(QMainWindow):
+class Window(QWidget):
     def __init__(self):
         super().__init__()
-
-        self.setWindowTitle("My App")
-        button = QPushButton("Press Me!")
-
-        # Set the central widget of the Window.
-        self.setCentralWidget(button)
-
-
+        self.icon = QIcon('images/icon.png')
+        self.setGeometry(200, 200, 700, 400)
+        self.setWindowTitle("Induce Voltage GUI")
+        self.setWindowIcon(QIcon(self.icon))
+        self.setFixedSize(700, 400)
 app = QApplication(sys.argv)
-
-window = MainWindow()
+window = Window()
 window.show()
 sys.exit(app.exec())
