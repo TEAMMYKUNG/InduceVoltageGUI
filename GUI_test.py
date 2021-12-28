@@ -1,6 +1,5 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget
-from PyQt6.QtGui import QIcon
 from PyQt6 import uic
 
 class UI(QWidget):

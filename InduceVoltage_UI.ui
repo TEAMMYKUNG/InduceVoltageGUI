@@ -109,6 +109,9 @@ color: rgb(40, 43, 18);</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="Distane_in">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -116,6 +119,9 @@ color: rgb(40, 43, 18);</string>
      <width>71</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
    </property>
   </widget>
   <widget class="QLineEdit" name="High_in">
@@ -127,6 +133,9 @@ color: rgb(40, 43, 18);</string>
      <height>21</height>
     </rect>
    </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
   </widget>
   <widget class="QLineEdit" name="Size_in">
    <property name="geometry">
@@ -136,6 +145,9 @@ color: rgb(40, 43, 18);</string>
      <width>71</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
