@@ -87,7 +87,7 @@ def calculate(xp, yp, size):
 
 m_xp = []
 v_induce = []
-for Distance_x in np.linspace(0.1, 10, 100):
+for Distance_x in np.linspace(0.1, 15, 150):
   Distance_x = round(Distance_x, 1)
   m_xp.append(Distance_x)
   v_induce.append(calculate(Distance_x, 15.1, 40))
