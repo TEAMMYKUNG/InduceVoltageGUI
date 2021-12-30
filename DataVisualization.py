@@ -130,7 +130,8 @@ for x_vax in x_ax:
     z_ax[cy][cx] = calculate(x_vax,y_vax,40)
 df = pd.DataFrame(data=z_ax, columns=x_ax, index=y_ax)
 plt.figure(figsize = (16,9))
-heatmap = sns.heatmap(df, annot = True, linewidths=.25, fmt='.3g', cbar_kws={'label': 'Induce Voltage(V)'})
+heatmap = sns.heatmap(df, annot = True, linewidths=.25, fmt='.3g', cmap='coolwarm', cbar_kws={'label': 'Induce Voltage(V)'})
+
 heatmap.invert_yaxis()
 heatmap.set(xlabel='Distance(m)', ylabel='High(m)')
 plt.show()
