@@ -2,6 +2,7 @@ from icecream import ic
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 plt.style.use=('ggplot')
 # !Define (x,y) phase A,B,C
 xa = 0; # phase A
@@ -115,4 +116,21 @@ area_plot = plt.axes(projection='3d')
 area_plot.plot_surface(x,y,z,cmap='plasma')
 area_plot.view_init(azim=180 , elev=90)
 
+
+x_ax = np.arange(0.2 , 5, 0.2)
+y_ax = np.arange(1 , 20, 1)
+x_ax = np.round(x_ax,2)
+z_ax = np.zeros(shape=(19,24))
+cx=-1
+for x_vax in x_ax:
+  cx +=1
+  cy = -1
+  for y_vax in y_ax:
+    cy +=1
+    z_ax[cy][cx] = calculate(x_vax,y_vax,40)
+df = pd.DataFrame(data=z_ax, columns=x_ax, index=y_ax)
+plt.figure(figsize = (16,9))
+heatmap = sns.heatmap(df, annot = True, linewidths=.25, fmt='.3g', cbar_kws={'label': 'Induce Voltage(V)'})
+heatmap.invert_yaxis()
+heatmap.set(xlabel='Distance(m)', ylabel='High(m)')
 plt.show()
